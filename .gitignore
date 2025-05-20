@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environment
+metronome-venv/
+venv/
+.env/
+
+# Pytest cache
+.pytest_cache/
+.cache/
+
+# VS Code settings
+.vscode/
+
+# macOS metadata
+.DS_Store
+
+# Audio cache/temp if any
+*.wav
+*.mp3~  # in case you ever edit them
+
+# Logs or debug output
+*.log
