@@ -19,10 +19,10 @@ def main():
     Creates a metronome and object.
     Starts the metronome (main thread) and a separate thread that runs the change_bpm method.
     runs the validate_input method. 
-    Params:
+    
+    args:
         None
-    Returns:
-        None
+    
     """
 
     stop_event = threading.Event() # got help from chatgpt for the improved thread-killing logic. 
@@ -47,13 +47,12 @@ def main():
 
 def validate_input(number_of_beats : str, bpm: str) -> tuple[int, int]:
     """
-    validates the input from main(), set the variables _number_of_beats and _bpm
+    validates the input from main(), set the variables _number_of_beats and _bpm. 
 
-    params:
+    Args:
         number_of_beats: str
         bpm: str
-    returns:
-        None
+   
 
     """
     if not number_of_beats.isdigit():
@@ -70,12 +69,11 @@ def validate_input(number_of_beats : str, bpm: str) -> tuple[int, int]:
 
 def change_bpm(metronome: Metronome, stop_event : threading.Event) -> None:
     """
-    Registers keypresse, calls on the increment/decrement methods based on keypress
+    Registers keypresse, calls on the increment/decrement methods based on keypress. 
 
-    Params:
-        metronome: Metronome
-    Returns:
-        None
+    Args:
+        metronome (Metronome): the metronome object
+    
     """
 
     fd = sys.stdin.fileno()
@@ -135,13 +133,12 @@ Metronome Controls:
 
 def increment(metronome: Metronome, n: int) -> None:
     """
-    Increments the bpm by n, ensures that the bpm cannot be incremented beyond 320
+    Increments the bpm by n, ensures that the bpm cannot be incremented beyond 320. 
 
     Params:
-        metronome: Metronome, 
-        n: int
-    Returns:
-        None
+        metronome (Metronome): the metronome object 
+        n (int): the number by which the bpm will be incremented 
+    
     """
 
     new_bpm = min(320, metronome.get_bpm() + n)
