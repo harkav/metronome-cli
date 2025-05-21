@@ -43,7 +43,7 @@ def main():
         sys.exit()
 
 
-def validate_input(number_of_beats, bpm) -> tuple[int, int]:
+def validate_input(number_of_beats : str, bpm: str) -> tuple[int, int]:
     """
     validates the input from main(), set the variables _number_of_beats and _bpm
 
@@ -66,7 +66,7 @@ def validate_input(number_of_beats, bpm) -> tuple[int, int]:
     return int(number_of_beats), int(bpm)
 
 
-def change_bpm(metronome: Metronome, stop_event : threading.Event):
+def change_bpm(metronome: Metronome, stop_event : threading.Event) -> None:
     """
     Registers keypresse, calls on the increment/decrement methods based on keypress
 
@@ -131,7 +131,7 @@ Metronome Controls:
 
 
 
-def increment(metronome: Metronome, n: int):
+def increment(metronome: Metronome, n: int) -> None:
     """
     Increments the bpm by n, ensures that the bpm cannot be incremented beyond 320
 
@@ -146,7 +146,7 @@ def increment(metronome: Metronome, n: int):
     metronome.set_bpm(new_bpm)
     print(f"New bpm = {new_bpm}")
 
-def decrement(metronome: Metronome, n: int):
+def decrement(metronome: Metronome, n: int) -> None:
     """
     Decrements the bpm by n, ensures that the bpm cannot be decremented to less than 20
     Params:
