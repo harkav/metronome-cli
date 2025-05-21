@@ -15,7 +15,7 @@ create a directory with the files listed under files.
 [optional] create a venv, run source ./bin/activate in the parent directory
 install the requirements using pip install -r requirements.txt 
 
-Run python -m ./metronome/project.py [number of beats per bar] [beats per minute ], for example python project.py 3 120 in a directory containing 
+Run python -m metronome.project.py [number of beats per bar] [beats per minute ], for example python project.py 3 120 in a directory containing 
 the files listed under files. 
 Make sure that the two wav-files, monitor.py, project.py and test_project.py (for testing) are all in the same directory. 
 
