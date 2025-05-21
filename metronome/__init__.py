@@ -1,1 +1,1 @@
-""" metronome init module"""
+"""Metronome init module."""

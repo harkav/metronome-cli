@@ -1,4 +1,4 @@
-
+"""Main program for the metronome."""
 
 import threading
 import time
@@ -9,31 +9,23 @@ import select
 import termios
 
 """
-Metronome, sounds taken with permission from https://pixabay.com/sound-effects/search/metronome/
+Metronome. 
 """
-
 
 def main():
     """
-    Gets arguments from sys.argv.
-    Creates a metronome and object.
-    Starts the metronome (main thread) and a separate thread that runs the change_bpm method.
-    runs the validate_input method. 
+    Start the metronome.
     
-    args:
-        None
-    
+    Parse arguments from sys.argv, create a metronome object. Start the main thread (metronome), 
+    as well as a separate thread that runs the change_bpm-method. Run the validate_input method. 
     """
-
     stop_event = threading.Event() # got help from chatgpt for the improved thread-killing logic. 
-    
     if not len(sys.argv) == 3:
         sys.exit("Please enter number of beats, and bpm, ex: 4 120")
 
     number_of_beats, bpm = validate_input(sys.argv[1], sys.argv[2])
     metronome = Metronome(number_of_beats, bpm)
-    # print(metronome._bpm)
-
+    
     try:
         # Pass the stop_event to both threads
         threading.Thread(target=change_bpm, args=(metronome, stop_event), daemon=True).start()
@@ -47,14 +39,15 @@ def main():
 
 def validate_input(number_of_beats : str, bpm: str) -> tuple[int, int]:
     """
-    validates the input from main(), set the variables _number_of_beats and _bpm. 
-
+    Validate input, convert to integers.
+    
     Args:
-        number_of_beats: str
-        bpm: str
-   
-
-    """
+        number_of_beats (str): number of beats in measure as a str. 
+        bpm (str): beats per minute as a str. 
+        
+    Returns: 
+        tuple[int, int]: Parsed number of beats and bpm.
+    """    
     if not number_of_beats.isdigit():
         raise ValueError("Should be an int, try again")
 
@@ -69,13 +62,12 @@ def validate_input(number_of_beats : str, bpm: str) -> tuple[int, int]:
 
 def change_bpm(metronome: Metronome, stop_event : threading.Event) -> None:
     """
-    Registers keypresse, calls on the increment/decrement methods based on keypress. 
+    Monitor keypresses, change BPM based on keypresses.
 
     Args:
         metronome (Metronome): the metronome object
-    
+        stop_event (threading.Event): Event used to signal thread termination.
     """
-
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
 
@@ -133,28 +125,25 @@ Metronome Controls:
 
 def increment(metronome: Metronome, n: int) -> None:
     """
-    Increments the bpm by n, ensures that the bpm cannot be incremented beyond 320. 
+    Increment the bpm by n, ensure that the bpm cannot be incremented beyond 320.
 
-    Params:
-        metronome (Metronome): the metronome object 
-        n (int): the number by which the bpm will be incremented 
+    Args:
+        metronome (Metronome): the metronome object.
+        n (int): the number by which the bpm will be incremented.
     
     """
-
     new_bpm = min(320, metronome.get_bpm() + n)
     metronome.set_bpm(new_bpm)
     print(f"New bpm = {new_bpm}")
 
 def decrement(metronome: Metronome, n: int) -> None:
     """
-    Decrements the bpm by n, ensures that the bpm cannot be decremented to less than 20
-    Params:
-        metronome: Metronome, 
-        n:int
-    Returns:
-        None
+    Decrement the bpm by n, ensure that the bpm cannot be decremented to less than 20.
+    
+    Args:
+        metronome (Metronome): the metronome object.  
+        n (int): the number by which the bpm should be decremented. 
     """
-
     new_bpm = max(20, metronome.get_bpm() + n)
     metronome.set_bpm(new_bpm)
     print(f"New bpm = {new_bpm}")
