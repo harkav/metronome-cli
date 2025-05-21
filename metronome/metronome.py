@@ -1,3 +1,5 @@
+"""Metronome module - provided the Metronome class"""
+
 import pygame 
 import time 
 import sys 
@@ -5,18 +7,17 @@ from pathlib import Path
 import threading
 
 class Metronome:
+    
+    """Custom class that acts like a metronome """
 
     def __init__(self, number_of_beats: int, bpm: int):
         """
-        Class that keeps track on number of beats and bpm, with get and set methods for number of beats and bpm.
-        Starts the metronome loop. 
+       Initialize a metronome instance.
 
-        Params:
-            number_of_beats: int
-            bpm : int
+        Args:
+            number_of_beats (int) : the number of beats per measure. 
+            bpm (int): the number of beats per minute. 
 
-        Returns:
-            Itself, I think.
         """
 
         self._number_of_beats =  number_of_beats  # instansiate number_of_beats
@@ -27,13 +28,15 @@ class Metronome:
 
     def _validate_files(self, file_one: str, file_two: str) -> None:
         """
-        Validate that the program finds the sound files
+        Validate that the program finds the sound files.
 
-        Params:
-            file_one : str the relative path to the first sound file
-            file_two: str the relative path to the second file
-        Returns:
-            None
+       
+        Args:
+            file_one (str): Path to the first sound file. 
+            file_two (str): Path to the second sound file. 
+            
+        Raises: 
+            SystemExit: If either or both of the files are missing.  
         """
 
         file_one_path = Path(file_one)
@@ -53,46 +56,42 @@ class Metronome:
 
     def get_bpm(self)-> int :
         """
-        Returns self._bpm
+        Return current BPM. 
 
-        Param:
-            Self
+       
         Returns:
-            self._bpm : int 
+            int : the current beats per minute
         """
 
         return self._bpm
 
-    def set_bpm(self, bpm)-> None:
+    def set_bpm(self, bpm : int)-> None:
         """
-        Sets self._bpm.
+        Set BPM.
 
-        Param:
-            self, bpm: int 
-        Returns:
-            None
+        Args:
+           bpm (int): new beats per minute. 
+        
         """
         self._bpm = bpm
 
     def set_number_of_beats(self, number_of_beats: int) -> None:
         """
-        Sets _number_of_beats
+        Set the number of beats per measure. 
 
-        Params:
-            number_of_beats : int
+        Args:
+            number_of_beats (int): New beat count. 
 
-        Returns:
-            None
         """
 
         self._number_of_beats = number_of_beats
 
     def run_metronome(self, stop_event : threading.Event) -> None:
         """
-        Runs the metronome loop.
+        Run the metronome loop.
 
-        Params:
-            self
+        Args:
+            stop_event (threading.Event): Event used to stop the loop.
         Returns:
             None
 

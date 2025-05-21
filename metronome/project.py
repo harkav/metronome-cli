@@ -1,6 +1,12 @@
+import sys
+import os
+
+# Add the root directory (parent directory of 'tests') to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+
 import threading
 import time
-import sys
 import tty
 from metronome.metronome import Metronome
 import select

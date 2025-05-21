@@ -15,7 +15,7 @@ create a directory with the files listed under files.
 [optional] create a venv, run source ./bin/activate in the parent directory
 install the requirements using pip install -r requirements.txt 
 
-Run python project.py [number of beats per bar] [beats per minute ], for example python project.py 3 120 in a directory containing 
+Run python -m ./metronome/project.py [number of beats per bar] [beats per minute ], for example python project.py 3 120 in a directory containing 
 the files listed under files. 
 Make sure that the two wav-files, monitor.py, project.py and test_project.py (for testing) are all in the same directory. 
 
@@ -109,7 +109,8 @@ I've also used pygame version 2.6.1 to play sounds as well as pytest 8.3.3 for r
         bpm: str
     returns:
         tuple[int, int]
-### change_bpm()
+
+### change_bpm(metronome: Metronome, stop_event : threading.Event)
     Registers keypresse, calls on the increment/decrement methods based on keypress
 
     Params:
@@ -117,7 +118,7 @@ I've also used pygame version 2.6.1 to play sounds as well as pytest 8.3.3 for r
     Returns:
         None
 
-### increment()
+### increment(metronome: Metronome, n: int)
     Increments the bpm by n, ensures that the bpm cannot be incremented beyond 320
 
     Params:
@@ -125,7 +126,7 @@ I've also used pygame version 2.6.1 to play sounds as well as pytest 8.3.3 for r
     Returns:
         None
 
-### decrement() 
+### decrement(metronome: Metronome, n: int) 
     Decrements the bpm by n, ensures that the bpm cannot be decremented to less than 20
     Params:
         metronome: Metronome, 
@@ -140,7 +141,7 @@ I've also used pygame version 2.6.1 to play sounds as well as pytest 8.3.3 for r
     Starts the metronome loop.
 
     
-### Metronome.__init__
+### Metronome.__init__(self, number_of_beats: int, bpm: int)
     init-method  
     Params: 
         _number_of_beats: str, changed to int during init
@@ -149,7 +150,7 @@ I've also used pygame version 2.6.1 to play sounds as well as pytest 8.3.3 for r
     Returns: 
         Itself, I think 
 
-### Metronome._validate_files
+### Metronome._validate_files(self, file_one: str, file_two: str)
     Validate that the program finds the sound files
 
         Params: 
@@ -158,7 +159,7 @@ I've also used pygame version 2.6.1 to play sounds as well as pytest 8.3.3 for r
         Returns: 
             None 
 
-### Metronome.get_bpm
+### Metronome.get_bpm(self)
 
     Returns self._bpm
 
@@ -167,7 +168,7 @@ I've also used pygame version 2.6.1 to play sounds as well as pytest 8.3.3 for r
         Returns: 
             self._bpm : int 
 
-### Metronome.set_bpm
+### Metronome.set_bpm(self, bmp: int)
 
     Sets self._bpm. 
 
@@ -176,7 +177,7 @@ I've also used pygame version 2.6.1 to play sounds as well as pytest 8.3.3 for r
         Returns: 
             None 
 
-### Metronome.set_number_of_beats
+### Metronome.set_number_of_beats(self, number_of_beats: int)
 
     Sets _number_of_beats
 
@@ -186,7 +187,7 @@ I've also used pygame version 2.6.1 to play sounds as well as pytest 8.3.3 for r
         Returns: 
             None
 
-### Metronome.run_metronome
+### Metronome.run_metronome(self, stop_event : threading.Event)
 
     Starts the metronome loop.
 
