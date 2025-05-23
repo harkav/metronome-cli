@@ -1,5 +1,4 @@
 # Metronome app, final project for cs50p
-#### Video demo: https://youtu.be/QHMxAvOUjOo
 #### Description: A metronome cli app for linux, I don't think it works on Windows. 
 
 
@@ -89,11 +88,11 @@ I've also used pygame version 2.6.1 to play sounds as well as pytest 8.3.3 for r
 
 ### Final thoughts 
 
-    I've learned a lot from this project. I still don't quite understand why I don't seem to need any locks. Isn't bpm a shared resource between two threads, and shouldn't there be some danger of race conditions? I should probably practice writing documentation a bit, 
-    but I think this is relatively clear, and that the language is possible to understand, despite my typos and lack of style. 
-    I also think that my tests aren't really testing some of the most important parts of the program, but I'm not sure how to test them with pytest. I have tried to run the program and stress-test it a bit, and it hasn't crashed yet. There is a little possible bug in the increment and decrement functions; if bpm is 312 and you try to increment with 10, it will just remain at 312. It would perhaps be better if it had incremented it up to 320, which is the upper limit. Same goes for the decrement function. Update, bug is supposed to be fixed now. 
+I've learned a lot from this project. I still don't quite understand why I don't seem to need any locks. Isn't bpm a shared resource between two threads, and shouldn't there be some danger of race conditions? I should probably practice writing documentation a bit, 
+but I think this is relatively clear, and that the language is possible to understand, despite my typos and lack of style. 
+I also think that my tests aren't really testing some of the most important parts of the program, but I'm not sure how to test them with pytest. I have tried to run the program and stress-test it a bit, and it hasn't crashed yet. There is a little possible bug in the increment and decrement functions; if bpm is 312 and you try to increment with 10, it will just remain at 312. It would perhaps be better if it had incremented it up to 320, which is the upper limit. Same goes for the decrement function. Update, bug is supposed to be fixed now. 
 
 
 ### Post-submission updates: 
 
-    Ran the code through chatgpt and got some help for fixing a few minor and not so minor things. Most importantly, the program exits more gracefully now. The menu doesn't print to the terminal every 0.5 seconds. 
+Ran the code through chatgpt and got some help for fixing a few minor and not so minor things. Most importantly, the program exits more gracefully now. The menu doesn't print to the terminal every 0.5 seconds. 
